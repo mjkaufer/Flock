@@ -27,7 +27,7 @@ var bodys = [];
 var groups = [];
 var eyes = [];
 var monsters = [];
-var numMonsters = 5
+var numMonsters = 30
 
 function onMouseUp(event) {
     console.log(event)
