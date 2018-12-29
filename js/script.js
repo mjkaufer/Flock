@@ -170,8 +170,11 @@ function tick() {
             var d = monster.group.position - corner
             var n = gridCenter - corner
             var dist = d.dot(n) / n.length
+            var cornerRepulse = (gridCenter - monster.group.position)
             if (dist < defaultPadding) {
-                repulse = (gridCenter - monster.group.position) * 2000
+                repulse = cornerRepulse * 2000
+            } else {
+                repulse += (cornerRepulse) / cornerRepulse.length / 20
             }
         })
 
