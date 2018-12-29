@@ -27,15 +27,44 @@ var bodys = [];
 var groups = [];
 var eyes = [];
 var monsters = [];
-var numMonsters = 30
+var numMonsters = 5
 
-for (var i = 0; i < numMonsters; i++) {
-    var monster = makeMonster();
+function onMouseUp(event) {
+    console.log(event)
+    if (event.event.shiftKey) {
+        removeMonster()
+    } else {
+        addMonster(event.event.clientX, event.event.clientY)    
+    }
+    
+}
+
+function addMonster(x, y) {
+    var monster = makeMonster(x, y);
     bodys.push(monster.body);
     groups.push(monster.group);
     eyes.push(monster.leftEye);
     eyes.push(monster.rightEye);
     monsters.push(monster);
+}
+
+function removeMonster() {
+    if (monsters.length == 0) {
+        return
+    }
+    var monster = monsters.splice(-1)
+    var group = groups.splice(-1)[0]
+    var eyePair = eyes.splice(-2)
+    var body = bodys.splice(-1)[0]
+    group.remove()
+    eyePair.forEach(function(eye){
+        eye.remove()
+    })
+    body.remove()
+}
+
+for (var i = 0; i < numMonsters; i++) {
+    addMonster()
 }
 
 var eyeConnections = new Group();
